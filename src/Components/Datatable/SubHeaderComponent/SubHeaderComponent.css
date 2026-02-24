@@ -1,0 +1,26 @@
+.reportButton {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  line-height: 16px;
+  border: 2px solid var(--baseColor);
+  background-color: transparent;
+  padding: 0 1rem;
+  margin-left: 0.5rem;
+
+  & > svg {
+    fill: var(--baseColor);
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: var(--bg-hover-button);
+    fill: var(--baseColor);
+  }
+}
+.reportButton:focus {
+  border: 2px solid var(--baseColor) !important;
+}

@@ -1,0 +1,41 @@
+.customToolTipStyle {
+  padding: 0.5rem 1rem;
+  background-color: rgba(249, 252, 255, 0.95);
+  border: 0.5px gray solid;
+  border-radius: 0.25rem;
+  & > :first-child {
+    display: flex;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    & > :last-child {margin-bottom: 0.23rem;}
+  }
+  & > p { color: var(--darker-gray-font)}
+  & > :last-child { text-align: center; }
+}
+
+.neutralTooltip {
+  border: 0.5px var(--font-blue-ligth) solid;
+  & > :first-child { color: var(--font-blue-ligth) }
+}
+
+.warningTooltip {
+  border: 0.5px var(--font-yellow-ligth) solid;
+  & > :first-child { color: var(--font-yellow-ligth) }
+}
+
+.processTooltip {
+  border: 0.5px var(--font-blue-normal) solid;
+  & > :first-child { color: var(--font-blue-normal) }
+}
+
+.failedTooltip {
+  border: 0.5px var(--font-red-normal) solid;
+  & > :first-child { color: var(--font-red-normal) }
+}
+
+.successTooltip {
+  border: 0.5px var(--font-green-ligth) solid;
+  & > :first-child { color: var(--font-green-ligth) }
+}

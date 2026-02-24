@@ -1,0 +1,11 @@
+.alertComponent {
+  display: flex;
+  font-size: 0.8rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-items: center;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.4rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}

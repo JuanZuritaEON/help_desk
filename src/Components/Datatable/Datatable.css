@@ -1,0 +1,43 @@
+.rdt_Pagination {
+  position: unset !important;
+}
+
+.rdt_TableHeader {
+  font-size: 2.5rem !important;
+  margin: 1rem auto -0.75rem !important;
+  color: var(--baseColor) !important;
+  text-align: center !important;
+}
+
+.rdt_TableCol_Sortable {
+  all: unset !important;
+  font-size: 0.75rem !important;
+  color: white !important;
+  display: flex !important;
+  & > div {
+    white-space: normal;
+  }
+}
+
+.rdt_TableCell div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expandRow div {
+  white-space: normal;
+  font-size: 0.7rem;
+}
+
+.normalRow div {
+  white-space: nowrap;
+}
+
+.noInfoComp {
+  width: 95%;
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}

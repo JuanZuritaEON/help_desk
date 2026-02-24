@@ -1,0 +1,43 @@
+.resultsContent {
+  width: 100%;
+  padding: 1.5rem;
+  background-color: var(--white-color);
+  & > :first-child {
+    padding: 1rem;
+    font-weight: normal;
+    color: var(--white-color);
+    border-radius: 20px 20px 0 0;
+    background-color: var(--baseColor);
+  }
+}
+
+.sectionTabCont {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  cursor: pointer;
+}
+
+.sectionTabSeparator {
+  all: unset;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  color: var(--baseColor);
+  justify-content: center;
+}
+
+.sectionTabSeparator:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.sectionTabSeparator:hover {
+  background-color: var(--bg-hover);
+}
+
+.sectionTabActive {
+  border-radius: 0 0 4px 4px;
+  background-color: var(--bg-hover);
+  border-bottom: 2px solid var(--baseColor);
+}

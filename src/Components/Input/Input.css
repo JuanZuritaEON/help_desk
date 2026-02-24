@@ -1,0 +1,51 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 30%;
+}
+
+.inputLabel {
+  color: var(--baseColor);
+  font-size: 0.875rem;
+  max-width: 100%;
+}
+
+.inputField {
+  display: flex;
+  align-items: center;
+  border: unset;
+  border-bottom: 2px solid var(--baseColor);
+  background-color: var(--white-color);
+  outline: 0;
+  gap: 0.7rem;
+  height: 30px;
+  width: 100%;
+
+  &:focus-within {
+    border-color: var(--baseColor);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+    border-radius: 4px;
+  }
+}
+
+.fielded {
+  height: 100%;
+  font-size: 0.875rem;
+  color: var(--baseColor);
+  width: 100%;
+  white-space: nowrap;
+  overflow: unset;
+  text-overflow: ellipsis;
+  border: unset;
+  padding: 0;
+  background-color: transparent;
+
+  &:focus,
+  &:focus-within,
+  &:focus-visible {
+    box-shadow: unset;
+    background-color: transparent;
+    outline: none;
+  }
+}

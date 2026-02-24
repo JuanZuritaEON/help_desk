@@ -1,0 +1,19 @@
+.detailContainer {
+  gap: 1rem;
+  display: grid;
+  height: 100%;
+  padding: 2rem 1rem;
+  border-radius: 0.25rem;
+  grid-template-columns: 30% auto;
+  background-color: var(--bg-special-light);
+  border: 1px solid var(--border-special-ligth);
+}
+
+.detailedRow {
+  overflow: auto;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 0.1rem;
+  text-overflow: ellipsis;
+  color: var(--darker-gray-font);
+}

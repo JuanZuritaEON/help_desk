@@ -1,0 +1,55 @@
+.sidebarContent {
+  width: 100%;
+  height: 100%;
+}
+
+.userDataInfo {
+  display: flex;
+  line-height: 2;
+  color: var(--darker-gray-font);
+  font-size: 0.75rem;
+  padding: 2rem 1.25rem;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 1.5rem 0 0 1.5rem;
+  background-color: var(--white-color);
+  & > :first-child {
+    width: 3.9rem;
+    height: 3.9rem;
+    font-size: 2rem;
+    padding-top: 0.1rem;
+    text-align: center;
+    margin: 2rem auto;
+    border-radius: 1.9rem;
+    color: var(--white-color);
+    font-family: var(--poppins-light);
+    background-color: var(--baseColor);
+  }
+  & > :last-child{ text-transform: capitalize; }
+}
+
+.sideTab {
+  opacity: .6;
+  padding: 1rem;
+  display: block;
+  cursor: pointer;
+  margin: 0.2rem 0;
+  border-radius: 1.5rem 0 0 1.5rem;
+  background-color: var(--white-color);
+}
+
+.sideTabButton {
+  all: unset;
+  width: 100%;
+  display: flex;
+  font-size: 0.8rem;
+  align-items: center;
+  & > :first-child{ margin-right: 1rem; }
+  & > :last-child { margin-left: auto; }
+}
+
+.activeSideTab {
+  background-color: #e3e9f7;
+  opacity: 1;
+}
