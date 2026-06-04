@@ -22,8 +22,8 @@ export const useLiferayData = () => {
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
-    if (window.Liferay) {
-      const Liferay = window.Liferay
+    if (globalThis.Liferay) {
+      const Liferay = globalThis.Liferay
       const userId = Liferay.ThemeDisplay.getUserId()
       const properties = ['CDC_ID_HDK', 'CDC_SEC_HDK', 'CDC_URL_HDK', 'CDC_AWS_HDK', 'CDC_SPW_HDK']
       const initRequest = async () => {

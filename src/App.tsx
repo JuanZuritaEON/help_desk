@@ -1,6 +1,7 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector, Texts } from './Redux'
 import { ToastContainer, toast } from 'react-toastify'
+import { GlobalMessage } from './Components'
 import { SAVE_ERRORS } from './Redux/Slices'
 import { useLiferayData } from './Hooks'
 import { Container } from './Containers'
@@ -11,24 +12,39 @@ const App = () => {
   const { errors } = useAppSelector((state) => state.app)
   const dispatch = useAppDispatch()
 
-  React.useEffect(() => {
-    errors.forEach(({ active, code, message }) => {
+  useEffect(() => {
+    errors.forEach(({ active, code, message, url }) => {
       if (active) {
-        toast.error(`${Texts.ERROR_CODE}: ${code && '---'} - ${message}`, {
+        const componentMessage = () => <GlobalMessage>
+          {
+            (url === 'cerrarMultipart' && code === 500) ? (
+              <div dangerouslySetInnerHTML={{ __html: message }}>
+              </div>
+            ) : (
+              <>
+                <span>Error en servicio: "{url}"</span>
+                <span>{Texts.ERROR_CODE}: "{code === 0 ? '000' : code}"</span>
+                <span>- {message} -</span>
+              </>
+            )
+          }
+        </GlobalMessage>
+        toast['error'](componentMessage, {
           position: "top-right",
-          autoClose: 7500,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: false,
           draggable: false,
           progress: undefined,
           theme: "colored",
+          autoClose: false,
         })
       }
     })
     if (errors.length > 1) dispatch(SAVE_ERRORS([{
-      code: '',
-      message: [''],
+      url: '',
+      code: 0,
+      message: '',
       active: false,
     }]))
   }, [errors, dispatch])
@@ -36,7 +52,13 @@ const App = () => {
   if (loading) return <></>
   else return (
     <>
-      <ToastContainer />
+      <ToastContainer style={{
+        width: 'fit-content',
+        padding: '1.25rem',
+        textAlign: 'justify',
+        marginLeft: '0.5rem',
+        lineHeight: '1.5'
+      }} />
       <Container numOtorgante={userData.data.numOtorgante} />
     </>
   )

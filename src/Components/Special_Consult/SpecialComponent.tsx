@@ -24,11 +24,7 @@ const SpecialComponent = (props: SpecialComponentData) => {
   const [modalTitle, setModalTitle] = React.useState('')
   const [loadingFile, setLoadingFile] = React.useState(true)
   const handleInitial = (date: Date) => setInitialDate(date)
-	const handleFinal = (date: Date) => {
-    setFinalDate(date)
-    //const endDate = new Date(date.getFullYear(), date.getMonth() + 1 === actualMonth ? date.getMonth() : date.getMonth() + 1, (date.getMonth() + 1) === actualMonth ? new Date().getDate() : 0);
-    //setFinalDate(endDate);
-  };
+	const handleFinal = (date: Date) => setFinalDate(date)
   const handleDownloadReport = async (fileName: string, id: number, key: string, eTag: string) => {
     try {
       setActive(true)
@@ -91,24 +87,24 @@ const SpecialComponent = (props: SpecialComponentData) => {
         {
           loadingFile ? <Loader wrapperClass='generalLoader' /> : (
             <>
-            {!fileReport.dataFile ? (
-              <div className='fileReportError'>
-                <ExclamationCircleIcon width={50} />
-                <p>Hubo un error al descargar tu archivo, por favor inténtalo de nuevo.</p>
-              </div>
-            ) : (
+            {fileReport.dataFile ? (
             <Button className='fileReportDownload reportDown' onClick={() => {
               const a = document.createElement('a')
               a.href = fileReport.dataFile
               a.download = fileReport.fileName
               document.body.appendChild(a)
               a.click()
-              document.body.removeChild(a)
+              a.remove()
               URL.revokeObjectURL(fileReport.dataFile)
             }}>
               <FolderArrowDownIcon className='iconStandardStyle' />
               <p>{fileReport.fileName}</p>
             </Button>
+            ) : (
+              <div className='fileReportError'>
+                <ExclamationCircleIcon width={50} />
+                <p>Hubo un error al descargar tu archivo, por favor inténtalo de nuevo.</p>
+              </div>
             )
             }
             </>

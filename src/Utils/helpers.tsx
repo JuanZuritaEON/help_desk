@@ -4,7 +4,7 @@ export const getInitials = (userName: string) => {
   if(userName === '') return 'LI';
   const [name, ...rest] = userName.split(/\s+/)
   const firstName = name.slice(0, 1)
-  const lastName = rest[rest.length - 1]?.slice(0,1) || ''
+  const lastName = rest.at(-1)?.slice(0,1) || ''
   return `${firstName}${lastName}`.toUpperCase().trim()
 }
 
@@ -42,7 +42,7 @@ export const dateTransform = (date: Date) => {
 export const convertToMonth = (value: string) => {
   let letra = ''
   const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-  const numberMonth = parseInt(value)
+  const numberMonth = Number.parseInt(value)
   if(numberMonth >= 1  && numberMonth <= 12 ) {
     letra = months[numberMonth - 1]
   }

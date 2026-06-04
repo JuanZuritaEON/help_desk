@@ -17,7 +17,7 @@ const BodyContainer = (props: BodyData) => {
   }
 
   React.useEffect(() => {
-    if (resultTabs.length) setCurrentTab(resultTabs.filter((tab: any) => tab.active)[0].name)
+    if (resultTabs.length) setCurrentTab(resultTabs.find((tab: any) => tab.active)?.name ?? '')
   }, [resultTabs])
 
   return (

@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import { store } from './Redux'
 import App from './App'
 import './assets/css/styles.css'
-declare global { interface Window { Liferay: any }}
-console.log('INITI')
+declare global { var Liferay: any }
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>

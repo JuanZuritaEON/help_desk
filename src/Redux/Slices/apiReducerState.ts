@@ -72,10 +72,11 @@ const initialState = {
     noInfoRequest: false,
   },
   errors: [{
-    code: '',
-    message: [''],
+    url: '',
+    code: 0,
+    message: '',
     active: false,
-  }],
+  }]
 }
 
 export const appReducerContext = createSlice({

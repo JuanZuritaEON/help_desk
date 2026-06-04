@@ -9,7 +9,7 @@ import { Mutex } from 'async-mutex'
 import CryptoJS from 'crypto-js'
 
 const mutex = new Mutex()
-const baseUrl = 'http://10.77.50.90:7002/consultas-historicas/historicos'
+const baseUrl = 'http://desarrollo:7002/consultas-historicas/historicos'
 const queryUrl = ''
 const rawBaseQuery = fetchBaseQuery({ baseUrl })
 const s3BaseQuery = fetchBaseQuery({ baseUrl: '' })
@@ -30,7 +30,7 @@ const dynamicBaseQuery: BaseQueryFn<
       }
     }
   } = api.getState() as RootState
-  if (window.Liferay) {
+  if (globalThis.Liferay) {
     const signRequestByKey = (request: any) => {
       const key  = CryptoJS.enc.Latin1.parse(CDC_SPW_HDK)
       const iv   = CryptoJS.enc.Latin1.parse(CDC_SPW_HDK)
@@ -88,7 +88,7 @@ const dynamicS3BaseQuery: BaseQueryFn<
       }
     }
   } = api.getState() as RootState
-  if (window.Liferay) {
+  if (globalThis.Liferay) {
     const adjustedArgs = typeof args === 'string' ? args : {
       ...args,
       url: CDC_AWS_HDK + '/' + args.url,
@@ -158,11 +158,15 @@ export const apiSlice = createApi({
         }
         return requestStatus
       },
-      transformErrorResponse: (error: any) => ({
-        code: error.status,
-        message: error?.data?.mensajes ?? error?.data?.errores[0]?.mensaje ?? error.error,
-        active: true,
-      }),
+      transformErrorResponse: (error: any) => {
+        console.log(error)
+        return ({
+          url: 'historicos/obtener',
+          code: error.status,
+          message: error?.error ?? error?.data?.error ?? error?.data?.mensaje ?? error?.data?.mensajes[0],
+          active: true,
+        })
+      },
     }),
     newRequest: builder.query<any, {numeroOtorgante: string, tipoOtorgante: string, userId: number, fechaInicio: string, fechaFin: string}>({
       query: initialLoad => ({
@@ -171,8 +175,9 @@ export const apiSlice = createApi({
         body: initialLoad
       }),
       transformErrorResponse: (error: any) => ({
+        url: 'historicos/alta',
         code: error.status,
-        message: error?.data?.mensajes ?? error?.data?.errores[0]?.mensaje ?? error.error,
+        message: error?.error ?? error?.data?.error ?? error?.data?.mensaje ?? error?.data?.mensajes[0],
         active: true,
       }),
     }),
@@ -193,8 +198,9 @@ export const apiSlice = createApi({
         dateExpired: response.detalleHistoricoConsulta.fechaResguardo
       }),
       transformErrorResponse: (error: any) => ({
+        url: 'historicos/detalle',
         code: error.status,
-        message: error?.data?.mensajes ?? error?.data?.errores[0]?.mensaje ?? error.error,
+        message: error?.error ?? error?.data?.error ?? error?.data?.mensaje ?? error?.data?.mensajes[0],
         active: true,
       }),
     })
@@ -220,6 +226,7 @@ export const S3Slice = createApi({
         return { data, isNotFound }
       },
       transformErrorResponse: (error: any) => ({
+        url: 'obtenerArchivo',
         code: error.status,
         message: error?.data?.mensajes ?? error?.data?.errores[0]?.mensaje ?? error.error,
         active: true,
