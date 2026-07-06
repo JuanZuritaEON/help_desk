@@ -1,8 +1,7 @@
-import React from 'react'
-import { modalComponentStyles, ModalData } from '../../Redux';
-import Button from '../Button/Button';
-import { isUndefined } from 'lodash';
+import { modalComponentStyles, ModalData } from '../../Redux'
 import ReactModal from 'react-modal'
+import { isUndefined } from 'lodash'
+import { Button } from '..'
 import './Modal.css'
 
 const modalSelector = document.getElementById('loadModal');
@@ -10,12 +9,14 @@ ReactModal.setAppElement(modalSelector);
 
 const Modal = (props: ModalData) => {
   const {
-    title,
+    activeModal: { active, setActive },
     children,
-    activeModal: { active, setActive},
-    headerComponent,
     footerComponent,
+    headerComponent,
     noFooter,
+    noHeader,
+    onAccept,
+    title
   } = props
 
   const closeModal = () => setActive(false)
@@ -27,18 +28,18 @@ const Modal = (props: ModalData) => {
       shouldCloseOnOverlayClick={false}
       style={{...modalComponentStyles}}
     >
-      {isUndefined(headerComponent) ? (
+      {isUndefined(headerComponent) && !noHeader ? (
         <header className='headerModal'>
-          <h2 className='modalTitle'>{title}</h2>
+          <span className='modalTitle'>{title}</span>
           <button type='button' className='modalCloseTab' onClick={closeModal}>
             <span>&times;</span>
           </button>
         </header>
         ) : headerComponent
       }
-      <body className='bodyModal'>
+      <div className='bodyModal'>
         {children}  
-      </body>
+      </div>
       {isUndefined(footerComponent) && !noFooter ? (
         <footer className='footerModal'>
           <Button
@@ -46,13 +47,15 @@ const Modal = (props: ModalData) => {
             onClick={closeModal}
           >Cancelar</Button>
           <Button
-            variant='outline-primary'
-          >Aceptar</Button>
+            variant='primary'
+            onClick={onAccept}
+            disabled={isUndefined(onAccept)}
+          >Enviar</Button>
         </footer>
         ) : footerComponent
       }
     </ReactModal>
-  );
+  )
 }
 
 export default Modal;

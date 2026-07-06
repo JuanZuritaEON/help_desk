@@ -66,7 +66,14 @@ const dynamicBaseQuery: BaseQueryFn<
     resultBaseQuery = rawBaseQuery(addedToken, api, extraOptions)
   } else {
     await mutex.waitForUnlock()
-    resultBaseQuery = rawBaseQuery(args, api, extraOptions)
+    const addedToken = typeof args === "string" ? args : {
+      ...args,
+      url: CDC_URL_HDK + '/consultas-historicas/historicos/' + args.url,
+      headers: {
+        'token': ''
+      }
+    }
+    resultBaseQuery = rawBaseQuery(addedToken, api, extraOptions)
   }
   return resultBaseQuery
 }
@@ -83,7 +90,7 @@ const dynamicS3BaseQuery: BaseQueryFn<
       appFluxContext: { 
         liferayUser: { 
           properties: { CDC_AWS_HDK },
-          data: { token }
+          data: { token, userId }
         },
       }
     }
@@ -94,7 +101,8 @@ const dynamicS3BaseQuery: BaseQueryFn<
       url: CDC_AWS_HDK + '/' + args.url,
       headers: {
         "Content-Type": "application/json",
-        "x-jwt-token": token
+        "x-jwt-token": token,
+        "x-user-con": userId.toString()
       }
     }
     resultBaseQuery = s3BaseQuery(
@@ -159,7 +167,6 @@ export const apiSlice = createApi({
         return requestStatus
       },
       transformErrorResponse: (error: any) => {
-        console.log(error)
         return ({
           url: 'historicos/obtener',
           code: error.status,

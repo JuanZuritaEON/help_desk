@@ -67,7 +67,9 @@ export interface ModalData {
   };
   headerComponent?: JSX.Element;
   footerComponent?: JSX.Element;
-  noFooter: boolean;
+  noHeader?: boolean;
+  noFooter?: boolean;
+  onAccept?: () => void;
 }
 
 ///////////////Terminar de asignar los types a cada componente y container

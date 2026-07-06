@@ -1,6 +1,6 @@
 import React from 'react'
-import { ArrowDownTrayIcon, ExclamationCircleIcon, FolderArrowDownIcon } from '@heroicons/react/20/solid'
-import { Button, DataTable, DetailedRow, Loader, Modal, SpecialConsult, SubHeaderComponent } from '..'
+import { ArrowDownTrayIcon, FolderArrowDownIcon } from '@heroicons/react/20/solid'
+import { Alert, Button, DataTable, DetailedRow, Loader, Modal, SpecialConsult, SubHeaderComponent } from '..'
 import { RootState, S3Slice, SAVE_ERRORS, Texts, useAppDispatch, useAppSelector, SpecialComponentData } from '../../Redux'
 import { assignPeriodDate, getStatusInfo, reportStatus, validateActualDate } from '../../Utils'
 import './Special.css'
@@ -11,7 +11,6 @@ const SpecialComponent = (props: SpecialComponentData) => {
   const dispatch = useAppDispatch()
   const { endpoints: { s3DownloadFile }} = S3Slice
   const isFirstTab = currentTab === Texts.NEW_REQUEST
-  //const actualMonth = actualDate.getMonth() + 1
   const initial = validateActualDate(new Date(actualDate.getFullYear(), actualDate.getMonth(), actualDate.getDate())).date
   const [initialDate, setInitialDate] = React.useState(initial)
 	const [finalDate, setFinalDate] = React.useState(initial)
@@ -100,12 +99,7 @@ const SpecialComponent = (props: SpecialComponentData) => {
               <FolderArrowDownIcon className='iconStandardStyle' />
               <p>{fileReport.fileName}</p>
             </Button>
-            ) : (
-              <div className='fileReportError'>
-                <ExclamationCircleIcon width={50} />
-                <p>Hubo un error al descargar tu archivo, por favor inténtalo de nuevo.</p>
-              </div>
-            )
+            ) : <Alert text={'Hubo un error al descargar tu archivo, por favor inténtalo de nuevo.'} type='danger' className='alertFileError' />
             }
             </>
           )

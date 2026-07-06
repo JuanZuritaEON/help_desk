@@ -1,4 +1,4 @@
-import React from 'react'
+import { isEmpty } from 'lodash'
 import './Input.css'
 
 const Input = (props: any) => {
@@ -9,35 +9,70 @@ const Input = (props: any) => {
     labelText,
     title,
     placeholder,
-    onClick,
     onChange,
     onKeyDown,
     width,
     value,
-    disabled = false
+    disabled = false,
+    classNames = '',
+    type = 'normalInput',
+    options,
+    innerRef,
+    ...other
   } = props
+  
+  const isSelect = type === 'select'
   const handleChange = ({target}: any) => {
     if (onChange) onChange(target.value)
   }
+
+  if (isSelect) return (
+    <div className={`selectWrap ${classNames}`}>
+      <select
+        id={id}
+        className={`
+          ${labelText === 'Periodos' ? 'periodSelect' : ''}
+          selectFieldNormal
+          paddingAdded`}
+        disabled={disabled}
+        title={title}
+        onChange={handleChange}
+        onKeyDown={onKeyDown}
+        autoComplete="off"
+        value={value}
+        required
+        {...other}
+      >
+        {isEmpty(value) && <option title='' value=''>{placeholder}</option>}
+        {options.map((option: {id:string;desc:string}, index: number) => (
+          <option title={option.desc} key={index + 1} value={option.id}>{option.desc}</option>
+        ))}
+      </select>
+      <label htmlFor={id} className='selectLabelCustom paddingAdded'>{labelText}</label>
+    </div>
+  )
+
   return (
-    <div className='wrap' onClick={onClick}>
+    <div className={`wrap ${classNames}`}>
       <label className='inputLabel'>
         {labelText}
       </label>
 
-      <div className='inputField'>
+      <div className='inputField' autoFocus>
         <input
           id={id}
-          className={`fielded form-control`}
+          className={`fielded`}
           value={value}
           disabled={disabled}
-          aria-describedby={aria || labelText}
+          aria-describedby={aria ?? labelText}
           title={disabled ? title : undefined}
           placeholder={placeholder}
           onChange={handleChange}
           onKeyDown={onKeyDown}
           width={width}
           autoComplete="off"
+          ref={innerRef}
+          {...other}
         />
         {children}
       </div>

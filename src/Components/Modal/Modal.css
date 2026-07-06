@@ -34,16 +34,16 @@
   text-transform: none;
   overflow: visible;
   float: right;
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1;
   color: var(--white-color);
   text-shadow: 0 1px 0 var(--white-color);
-  opacity: .5;
+  opacity: .75;
   border: 0;
   background-color: transparent;
-  padding: 0.75rem;
-  margin: -1rem;
+  padding: 1.7rem 0.5rem;
+  margin: -2rem -1rem;
   cursor: pointer;
 }
 .modalCloseTab:hover {
@@ -52,10 +52,9 @@
 
 .bodyModal {
   background-color: var(--white-color);
-  padding: 1.25rem;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
+  margin: 0;
+  height: auto;
 }
 
 .footerModal {

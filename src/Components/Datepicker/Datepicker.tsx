@@ -1,20 +1,20 @@
-import { es } from 'date-fns/locale'
+import es from 'date-fns/locale/es'
 import { memo } from 'react'
-import ReactDatePicker, {
+import DatePicker, {
   ReactDatePickerProps,
   registerLocale
 } from "react-datepicker"
 import "./Datepicker.css"
 registerLocale("es", es)
 
-const Datepicker = ({
+const InputDate = ({
   dateFormat = "dd/MM/yy",
   maxDate = new Date(),
   ...props
 }: ReactDatePickerProps) => (
-  <ReactDatePicker
-    className='inputContenteDate form-control'
-    calendarClassName="card"
+  <DatePicker
+    className='customInputDate'
+    calendarClassName="customCard"
     locale="es"
     dateFormat={dateFormat}
     maxDate={maxDate}
@@ -23,4 +23,4 @@ const Datepicker = ({
   />
 )
 
-export default memo(Datepicker)
+export default memo(InputDate)
